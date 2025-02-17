@@ -11,11 +11,11 @@
  ***************************************************************************/
 
 
-#include <luss/io/tcp_socket.h>
-#include <luss/string.h>
+#include <oos/io/tcp_socket.h>
+#include <oos/string.h>
 
 
-namespace lus::io {
+namespace oos::io {
 
 
 tcp_socket::tcp_socket(object* parent, const std::string& ii): object(parent,ii)
@@ -36,7 +36,7 @@ int tcp_socket::create()
 {
     m_fd = ::socket(PF_INET,SOCK_STREAM, 0);
     //u_int32_t options = ifd::O_BLOCK|ifd::O_BUF|ifd::O_READ|ifd::O_WRITE|ifd::O_WINDOWED;
-    lus::string str;
+    oos::string str;
     str | id() | ':' | m_fd;
 
     m_ifd = new lfd(str(), m_fd, 4096, lfd::IMM|lfd::READ|lfd::WRITE, EPOLLIN|EPOLLOUT|EPOLLHUP|EPOLLERR, nullptr);
@@ -46,7 +46,7 @@ int tcp_socket::create()
 void tcp_socket::set_sockfd(int fd)
 {
     m_fd = fd;
-    lus::string str;
+    oos::string str;
     str | id() | ':' | m_fd;
 
     m_ifd = new lfd(str(), m_fd, 4096, lfd::IMM|lfd::READ|lfd::WRITE, EPOLLIN|EPOLLOUT|EPOLLHUP|EPOLLERR, nullptr);
@@ -59,7 +59,7 @@ hostent* tcp_socket::host(const char* node, uint port, sockaddr_in* _addr_in, st
 
     int a,b,c,d;
 
-    lus::string SNodeIP = "%d.%d.%d.%d";
+    oos::string SNodeIP = "%d.%d.%d.%d";
 
 
     if (!he ) {
@@ -108,8 +108,8 @@ char* tcp_socket::machine_hostname()
 
 int tcp_socket::mkaddr(void* addr, int* addr_len, const char* addr_str, const char* proto)
 {
-    lus::string saddress = addr_str;
-    lus::string::word::list htokens{};
+    oos::string saddress = addr_str;
+    oos::string::word::list htokens{};
 
     auto n = saddress.words(htokens, false, ":");
 

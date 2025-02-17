@@ -11,14 +11,14 @@ pragma warning(disable : 4996)
 #   define _CRT_SECURE_NO_WARNINGS
 #   define _SCL_SECURE_NO_WARNINGS
 #   define NOMINMAX
-#   if defined(LUSSIOLIB_EXPORTS)
-#       define LUSSIOLIB __declspec(dllexport)
+#   if defined(OOSIOLIB_EXPORTS)
+#       define OOSIOLIB __declspec(dllexport)
 #   else
-#       define LUSSIOLIB __declspec(dllimport)
+#       define OOSIOLIB __declspec(dllimport)
 #   endif
 
 #else
-#   define LUSSIOLIB
+#   define OOSIOLIB
 #endif
 
 // ------------ Mandatory includes ------------
@@ -64,7 +64,7 @@ pragma warning(disable : 4996)
 
 // //----------------------------------------------------------------------------
 
-// namespace lus::integers
+// namespace oos::integers
 // {
 // using Byte  = uint8_t;
 // using I8    = int8_t;

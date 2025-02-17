@@ -18,17 +18,17 @@
 
 #pragma once
 
-#include <luss/journal.h>
-#include <luss/notify.h>
+#include <oos/journal.h>
+#include <oos/notify.h>
 #include <arpa/inet.h>
-#include <luss/notify.h>
-#include <luss/io/export.h>
+#include <oos/notify.h>
+#include <oos/io/export.h>
 
-using namespace lus::integers;
-namespace lus::io
+using namespace oos::integers;
+namespace oos::io
 {
 
-class LUSSIOLIB lfd
+class OOSIOLIB lfd
 {
     CLASSNAME(lfd)
 

@@ -2,12 +2,12 @@
 // Created by oldlonecoder on 27/12/24.
 //
 
-#include <luss/io/lfd.h>
+#include <oos/io/lfd.h>
 #include <sys/ioctl.h>
 
 //#include <utility>
 
-namespace lus::io
+namespace oos::io
 {
 
 

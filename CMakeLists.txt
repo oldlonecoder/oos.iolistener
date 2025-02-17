@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 
-set(FRAME "luss")
+set(FRAME "oos")
 set(WORK   "io")
 
 
@@ -19,8 +19,8 @@ set(HEADERS
     ${TARGET_DIR}/tcp_socket.h
 )
 
-
-add_library("${FRAME}.${WORK}" STATIC
+set(OUT ${FRAME}_${WORK})
+add_library(${OUT} STATIC
 
     ${HEADERS}
     ${TARGET_DIR}/lfd.cc
@@ -33,14 +33,14 @@ add_library("${FRAME}.${WORK}" STATIC
 
 )
 
-target_include_directories("${FRAME}.${WORK}" PUBLIC
+target_include_directories(${OUT} PUBLIC
                            "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
                            $<INSTALL_INTERFACE:include/${TARGET_DIR}>
 )
 
-target_compile_definitions("${FRAME}.${WORK}" PUBLIC "${FRAME}.${WORK}_DEBUG=$<CONFIG:Debug>")
+target_compile_definitions(${OUT} PUBLIC "${OUT}_DEBUG=$<CONFIG:Debug>")
 include(GenerateExportHeader)
-generate_export_header("${FRAME}.${WORK}" EXPORT_FILE_NAME "${FRAME}.${WORK}_export")
+generate_export_header(${OUT} EXPORT_FILE_NAME "${OUT}_export")
 
 IF (EXISTS "${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json")
     EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_if_different
@@ -49,14 +49,14 @@ IF (EXISTS "${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json")
 ENDIF ()
 
 # static libluss.a should have been put into the current project archive file (libluss.io.a). So no need to link again with luss.a in the other project.
-target_link_libraries("${FRAME}.${WORK}" ${CMAKE_DL_LIBS} luss)
+target_link_libraries(${OUT} ${CMAKE_DL_LIBS} luss)
 
 
 
 
 
-install(TARGETS "${FRAME}.${WORK}"
-        EXPORT  "${FRAME}.${WORK}"
+install(TARGETS ${OUT}
+        EXPORT  ${OUT}
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib
         RUNTIME DESTINATION bin
@@ -65,12 +65,12 @@ install(TARGETS "${FRAME}.${WORK}"
 INSTALL(FILES ${HFILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/${TAGET_DIR}")
 
 
-add_custom_target("uninstall_${FRAME}.${WORK}" COMMENT "Uninstall installed files")
+add_custom_target("uninstall_${OUT}" COMMENT "Uninstall installed files")
 add_custom_command(
-    TARGET "uninstall_${FRAME}.${WORK}"
+    TARGET "uninstall_${OUT}"
     POST_BUILD
-    COMMENT "Uninstall ${FRAME}.${WORK} files under include and lib"
-    COMMAND rm -vrf ${CMAKE_INSTALL_PREFIX}/include/${TARGET_DIR} ${CMAKE_INSTALL_PREFIX}/lib/lib${FRAME}.${WORK}* || echo Nothing in install_manifest.txt to be uninstalled!
+    COMMENT "Uninstall ${OUT} files under include and lib"
+    COMMAND rm -vrf ${CMAKE_INSTALL_PREFIX}/include/${TARGET_DIR} ${CMAKE_INSTALL_PREFIX}/lib/lib${OUT}* || echo Nothing in install_manifest.txt to be uninstalled!
 )
 
 

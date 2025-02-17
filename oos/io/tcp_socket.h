@@ -11,8 +11,8 @@
  ***************************************************************************/
 
 #pragma once
-#include <luss/expect.h>
-#include <luss/object.h>
+#include <oos/expect.h>
+#include <oos/object.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -25,13 +25,13 @@
 #include <fcntl.h>
 
 
-#include <luss/io/listener.h>
+#include <oos/io/listener.h>
 #include <cerrno>
 
-namespace lus::io
+namespace oos::io
 {
 
-class LUSSIOLIB tcp_socket : public object
+class OOSIOLIB tcp_socket : public object
 {
     hostent*                m_hentry;
     sockaddr_in             m_addr_in;
