@@ -1,13 +1,13 @@
 
 # project lus_iolistener ( basic io file listener )
 
-# Roadmap of this hobbist project
+# Roadmap of this (personal, hobbyist) project
 
 ### Exploring, Learning and write a set of C++ framework of (from my own) libraries
 
-## role of this sublibrary:
+## roles of this sublibrary:
 
-    - [class lus::lfd]
+    - [lus::lfd]
         file descriptor data for the listener
     - [lus::listener]
         listener looping on (linux only) epoll_events
