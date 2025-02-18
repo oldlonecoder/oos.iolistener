@@ -16,14 +16,14 @@
 
 
 #pragma once
-#include <oos/io/lfd.h>
-#include <oos/object.h>
+#include <lus/io/lfd.h>
+#include <lus/object.h>
 #include <sys/epoll.h>
 
-namespace oos::io
+namespace lus::io
 {
 
-class OOSIOLIB listener : object
+class LUSIOLIB listener : object
 {
 
     lfd::list _fds{};

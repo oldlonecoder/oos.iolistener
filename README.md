@@ -1,5 +1,5 @@
 
-# project oss.iolistener ( basic io file listener )
+# project lus_iolistener ( basic io file listener )
 
 # Roadmap of this hobbist project
 
@@ -7,11 +7,11 @@
 
 ## role of this sublibrary:
 
-    - [class oos::lfd]
+    - [class lus::lfd]
         file descriptor data for the listener
-    - [oos::listener]
+    - [lus::listener]
         listener looping on (linux only) epoll_events
-    - [oos::tcp_socket]
+    - [lus::tcp_socket]
         Basic unix/linux tcp socket creation
 ---
 ---
