@@ -37,7 +37,7 @@ int tcp_socket::create()
     m_fd = ::socket(PF_INET,SOCK_STREAM, 0);
     //u_int32_t options = ifd::O_BLOCK|ifd::O_BUF|ifd::O_READ|ifd::O_WRITE|ifd::O_WINDOWED;
     lus::string str;
-    str | id() | ':' | m_fd;
+    str << id() << ':' << m_fd;
 
     m_ifd = new lfd(str(), m_fd, 4096, lfd::IMM|lfd::READ|lfd::WRITE, EPOLLIN|EPOLLOUT|EPOLLHUP|EPOLLERR, nullptr);
     return m_fd;
@@ -47,7 +47,7 @@ void tcp_socket::set_sockfd(int fd)
 {
     m_fd = fd;
     lus::string str;
-    str | id() | ':' | m_fd;
+    str << id() << ':' << m_fd;
 
     m_ifd = new lfd(str(), m_fd, 4096, lfd::IMM|lfd::READ|lfd::WRITE, EPOLLIN|EPOLLOUT|EPOLLHUP|EPOLLERR, nullptr);
 }

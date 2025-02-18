@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(TARGET_DIR ${FRAME}/${WORK})
-
+message(STATUS "TARGET_DIR: ${TARGET_DIR}")
 set(HEADERS
     ${TARGET_DIR}/export.h
     ${TARGET_DIR}/lfd.h
@@ -62,7 +62,7 @@ install(TARGETS ${OUT}
         RUNTIME DESTINATION bin
         )
 
-INSTALL(FILES ${HFILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/${TAGET_DIR}")
+INSTALL(FILES ${HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/${TARGET_DIR}")
 
 
 add_custom_target("uninstall_${OUT}" COMMENT "Uninstall installed files")
