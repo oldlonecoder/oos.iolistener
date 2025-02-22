@@ -17,13 +17,12 @@
 
 #pragma once
 #include <lus/io/lfd.h>
-#include <lus/object.h>
 #include <sys/epoll.h>
 
 namespace lus::io
 {
 
-class LUSIOLIB listener : object
+class LUSIOLIB listener
 {
 
     lfd::list _fds{};
@@ -33,8 +32,8 @@ class LUSIOLIB listener : object
     bool _kill{false};
 public:
     listener() = default;
-    listener(object* parent_obj, const std::string& obj_id);
-    ~listener() override;
+    listener(const std::string& obj_id);
+    ~listener();
     std::pair<rem::cc, lfd&> attach(lfd&& fds); // ex.: attach({"terminal input channel", 0, 1024, EPOLLIN|EPOLLERR|EPOLLHUP,nullptr});
     rem::cc detach(int fnum);
     //std::pair<rem::cc, lfd&>  add_fd(lfd&& fds);

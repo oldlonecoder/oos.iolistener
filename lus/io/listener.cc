@@ -11,7 +11,7 @@ namespace lus::io
 
 static lfd _null{};
 
-listener::listener(object* parent_obj, const std::string& obj_id): object(parent_obj, obj_id){}
+listener::listener(const std::string& obj_id){}
 
 
 listener::~listener()
