@@ -15,40 +15,30 @@
  ******************************************************************************************/
 
 
+
 #pragma once
+
 #include <lus/io/lfd.h>
-#include <sys/epoll.h>
+#include <lus/io/kbhit.h>
+#include <lus/io/mouse.h>
 
 namespace lus::io
 {
 
-class LUSIOLIB listener
+
+
+//////////////////////////////////////////////////////////////////////
+/// \brief The ansi_parser class
+/// \note We parse either kbhit or mouse...
+/// \author oldlonecoder Serge Lussier (serge.lussier@oldlonecoder.club)
+///
+class LUSIOLIB ansi_parser
 {
 
-    lfd::list _fds{};
-    int _epoll_fd{-1};
-    static constexpr int max_events{10};
-    epoll_event _poll_events[listener::max_events]{};
-    bool _kill{false};
+
 public:
-    listener() = default;
-    listener(const std::string& obj_id);
-    ~listener();
-    std::pair<rem::cc, lfd&> attach(lfd&& fds); // ex.: attach({"terminal input channel", 0, 1024, EPOLLIN|EPOLLERR|EPOLLHUP,nullptr});
-    rem::cc detach(int fnum);
-    //std::pair<rem::cc, lfd&>  add_fd(lfd&& fds);
-    //rem::cc init();
-    rem::cc terminate();
-
-    rem::cc run();         ///< blocking loop of polls
-    rem::cc poll(int _fd); ///< One-shot poll check and consume at once.
-    std::pair<rem::cc, io::lfd&> query_lfd(int fnum);
-    rem::cc refresh_fds();
-
-    rem::cc open();
-    rem::cc close();
-
+    ansi_parser();
 };
 
+} // namespace lus::io
 
-} // namespace lux::io

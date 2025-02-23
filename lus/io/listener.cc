@@ -130,6 +130,66 @@ rem::cc listener::run()
     return rem::cc::done;
 }
 
+rem::cc listener::poll(int _fd)
+{
+    auto [r, f] = query_lfd(_fd);
+    if(!r)
+    {
+        journal::error() << " file descriptor #" << color::red4 << _fd << color::z << " is not registered into this listener's group." << journal::eol;
+        return r;
+    }
+
+    auto nevents = epoll_wait(_epoll_fd, _poll_events, listener::max_events,-1);
+    journal::info() << color::yellow << nevents << color::z << " events:" << journal::endl;
+    refresh_fds();
+    if ((nevents <= 0) && (errno != EINTR))
+    {
+        journal::error() << "epoll_wait() failed: (events count = " << color::yellow << nevents << color::z << "): " << color::deeppink8 <<  strerror(errno) << journal::endl;
+        return rem::cc::failed;
+    }
+    if(f._fd == _poll_events[0].data.fd)
+    {
+        if (_poll_events[0].events & EPOLLIN)
+        {
+            if (f._flags.active)
+            {
+                auto a = f._read(); // Actual read and process input data signal
+                //journal::debug() << color::aqua << fd._id << color::z << ": [" << static_cast<int>(a) << "] " << rem::to_string(a) << journal::endl;
+                if (a != rem::action::cont){
+                    //journal::info() << "[" << a << "] active lfd to be killed."  << journal::endl;
+                    f.kill();
+                }
+            }
+            else
+                journal::debug() << " invoked lfd is NOT active." << journal::endl;
+        }
+        if ((_poll_events[0].events & EPOLLHUP) || (_poll_events[0].events & EPOLLERR))
+        {
+            journal::info() << " broken link on '" << color::aqua << f._id << color::z <<  journal::endl;
+            f.kill();
+        }
+    }
+
+    return rem::cc::empty;
+}
+
+
+
+
+std::pair<rem::cc, lfd &> listener::query_lfd(int fnum)
+{
+    for(auto& fd : _fds)
+        if(fd._fd == fnum)
+            return {rem::cc::ready, fd};
+
+    //auto i = std::find_if(_fds.begin(), _fds.end(), [&](const auto& c){ return fnum == c._fd; });
+    //if(i != _fds.end()) return {rem::cc::ready,*i};
+
+    // Yes returns valid lfd, but we can modify it as we wish - not a good idea. Only temporary solution.
+    return {rem::cc::rejected, lfd::null_};
+}
+
+
 
 rem::cc listener::refresh_fds()
 {

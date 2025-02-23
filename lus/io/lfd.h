@@ -31,7 +31,7 @@ namespace lus::io
 class LUSIOLIB lfd
 {
     CLASSNAME(lfd)
-
+    static lfd null_;
     u64 _block_size{0}; ///< Actual io kernel read buffer size ( fd,socket,...)
     u8* _buffer_ptr{nullptr}; ///< Either external or internal buffer pointer.
     u64 _window_block_size{0}; ///< Not circular mode: Expecting bytes window block size. In Circular mode : The length of the buffer.

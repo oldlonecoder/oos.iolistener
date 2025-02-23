@@ -11,6 +11,7 @@ namespace lus::io
 {
 
 
+lfd lfd::null_{"null",-1,0,0,0,nullptr};
 
 
 lfd::lfd(std::string  a_id, int _file_num, u64 _window_block_size, u64 _operation_bits, int _polling_bits, u8* _buf_ptr):

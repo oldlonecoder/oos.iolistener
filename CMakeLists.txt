@@ -12,12 +12,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(TARGET_DIR ${FRAME}/${WORK})
 message(STATUS "TARGET_DIR: ${TARGET_DIR}")
+
 set(HEADERS
     ${TARGET_DIR}/export.h
     ${TARGET_DIR}/lfd.h
     ${TARGET_DIR}/listener.h
     ${TARGET_DIR}/tcp_socket.h
     ${TARGET_DIR}/kbhit.h
+    ${TARGET_DIR}/mouse.h
+    ${TARGET_DIR}/ansi_parser.h
 )
 
 set(OUT ${FRAME}_${WORK})
@@ -28,12 +31,8 @@ add_library(${OUT} STATIC
     ${TARGET_DIR}/listener.cc
     ${TARGET_DIR}/tcp_socket.cc
     ${TARGET_DIR}/kbhit.cc
-    lus/io/mouse.h lus/io/mouse.cc
-    # --- For luss.whatever!
-    # ${PROJECT_NAME}/io/kdb.cc
-    # ${PROJECT_NAME}/io/vchar.cc
-    # ${PROJECT_NAME}/io/console.cc
-
+    ${TARGET_DIR}/mouse.cc
+    ${TARGET_DIR}/ansi_parser.cc
 )
 
 target_include_directories(${OUT} PUBLIC
