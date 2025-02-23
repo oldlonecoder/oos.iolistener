@@ -17,6 +17,7 @@ set(HEADERS
     ${TARGET_DIR}/lfd.h
     ${TARGET_DIR}/listener.h
     ${TARGET_DIR}/tcp_socket.h
+    ${TARGET_DIR}/kbhit.h
 )
 
 set(OUT ${FRAME}_${WORK})
@@ -26,6 +27,7 @@ add_library(${OUT} STATIC
     ${TARGET_DIR}/lfd.cc
     ${TARGET_DIR}/listener.cc
     ${TARGET_DIR}/tcp_socket.cc
+    ${TARGET_DIR}/kbhit.cc
     # --- For luss.whatever!
     # ${PROJECT_NAME}/io/kdb.cc
     # ${PROJECT_NAME}/io/vchar.cc
