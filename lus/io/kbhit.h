@@ -31,7 +31,7 @@ namespace lus::io
 using namespace lus::integers;
 
 
-struct LUSTUILIB kbhit
+struct LUSIOLIB kbhit
 {
 
     enum enums : u8
@@ -185,7 +185,7 @@ struct LUSTUILIB kbhit
         NO_KEY,
     };
 
-    struct LUSTUILIB state
+    struct LUSIOLIB state
     {
         u8 shift : 1;
         u8 ctrl  : 1;

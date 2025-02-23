@@ -17,7 +17,7 @@
 
 
 
-#include <lus/ui/kbhit.h>
+#include <lus/io/kbhit.h>
 
 
 namespace lus::io

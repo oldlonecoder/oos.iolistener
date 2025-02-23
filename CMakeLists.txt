@@ -28,6 +28,7 @@ add_library(${OUT} STATIC
     ${TARGET_DIR}/listener.cc
     ${TARGET_DIR}/tcp_socket.cc
     ${TARGET_DIR}/kbhit.cc
+    lus/io/mouse.h lus/io/mouse.cc
     # --- For luss.whatever!
     # ${PROJECT_NAME}/io/kdb.cc
     # ${PROJECT_NAME}/io/vchar.cc
