@@ -119,7 +119,8 @@ kbhit::dbgroup kbhit::keys_db
     {kbhit::CTRL_ALT_ARROW_LEFT   ,0x00001b5b313b3744,"Ctrl+Alt+ArrowLeft"    },
     {kbhit::CTRL_ALT_ARROW_RIGHT  ,0x00001b5b313b3743,"Ctrl+Alt+ArrowRight"   },
     {kbhit::CTRL_ALT_ARROW_UP     ,0x00001b5b313b3741,"Ctrl+Alt+ArrowUp"      },
-    {kbhit::CTRL_ALT_ARROW_DOWN   ,0x00001b5b313b3742,"Ctrl+Alt+ArrowDown"    }
+    {kbhit::CTRL_ALT_ARROW_DOWN   ,0x00001b5b313b3742,"Ctrl+Alt+ArrowDown"    },
+    {kbhit::CHARACTER             ,0x0000000000000000,"CHAR INPUT"            }, ///< Never hit.
 
 
     //...

@@ -37,7 +37,23 @@ class LUSIOLIB ansi_parser
 
 
 public:
-    ansi_parser();
+
+    union input_data
+    {
+        mouse mev;
+        kbhit kev;
+    } data{};
+
+    ansi_parser() = default;
+    ~ansi_parser() = default;
+
+    std::pair<rem::cc, ansi_parser::input_data> parse(lfd& _fd); ///< Returns either key or mouse
+private:
+    rem::cc parse_kbhit(lfd& _fd);
+    rem::cc parse_mouse(lfd& _fd);
+
+    std::pair<rem::cc, std::vector<int>> parse_args(lfd& _fd);
+
 };
 
 } // namespace lus::io
